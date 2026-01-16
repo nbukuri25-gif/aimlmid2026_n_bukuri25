@@ -87,6 +87,185 @@ The extracted coefficients and visualizations demonstrate that the model correct
 
 ---
 
+# Assignment 2 – Spam Email Detection
+
+---
+
+## Dataset Description
+
+The dataset used in this assignment is provided in the file:
+
+```
+n_bukuri25_11221924.csv
+```
+
+It contains **2500 email samples** with the following columns:
+
+- `words` – total number of words in the email
+- `links` – number of links contained in the email
+- `capital_words` – number of fully capitalized words
+- `spam_word_count` – number of spam-related keywords
+- `is_spam` – target label
+  - `0` → legitimate email
+  - `1` → spam email
+
+---
+
+## Model Selection
+
+Since the task is to classify emails into **two classes (spam / legitimate)**,  
+**binary logistic regression** was selected.
+
+Logistic regression is suitable because:
+
+- the output is binary,
+- it provides interpretable coefficients,
+- it produces probabilistic predictions.
+
+Feature scaling was applied using **StandardScaler** to ensure stable training.
+
+---
+
+## Model Training
+
+The dataset was split into:
+
+- **70% training data** (1750 samples)
+- **30% testing data** (750 samples)
+
+The model was trained using the **LBFGS optimizer**.
+
+### Learned Coefficients
+
+The trained model produced the following coefficients:
+
+| Feature         | Coefficient |
+| --------------- | ----------- |
+| words           | 1.786       |
+| links           | 2.377       |
+| capital_words   | 3.469       |
+| spam_word_count | 2.360       |
+
+The largest coefficient corresponds to `capital_words`, indicating that excessive capitalization is a strong indicator of spam.
+
+---
+
+## Model Evaluation
+
+### Accuracy
+
+The trained model achieved an accuracy of:
+
+```
+95.33%
+```
+
+### Confusion Matrix
+
+The confusion matrix (rows = actual, columns = predicted):
+
+```
+[[358  10]
+ [ 25 357]]
+```
+
+- 358 legitimate emails correctly classified
+- 357 spam emails correctly classified
+- 10 false positives
+- 25 false negatives
+
+---
+
+## Visualizations
+
+### Class Distribution
+
+The following figure shows the distribution of legitimate and spam emails in the dataset:
+
+![Class Distribution](class_distribution.png)
+
+---
+
+### Confusion Matrix Visualization
+
+The confusion matrix is visualized below for easier interpretation:
+
+![Confusion Matrix](confusion_matrix.png)
+
+---
+
+## Email Text Classification Demo
+
+A console-based email checker was implemented.  
+The email text is parsed, features are extracted, and the trained model is used for prediction.
+
+### Spam Email Example
+
+**Email text:**
+
+```
+URGENT WINNER NOTICE!!!
+YOU HAVE WON A FREE CASH PRIZE AND EXCLUSIVE BONUS.
+CLICK NOW TO CLAIM YOUR MONEY!!!
+```
+
+**Extracted features:**
+
+- words: 44
+- links: 3
+- capital_words: 28
+- spam_word_count: 28
+
+**Prediction:**
+
+```
+Spam (probability ≈ 1.000)
+```
+
+---
+
+### Legitimate Email Example
+
+**Email text:**
+
+```
+Hi team,
+Please find the meeting notes from today's sync attached.
+Best regards.
+```
+
+**Extracted features:**
+
+- words: 27
+- links: 0
+- capital_words: 0
+- spam_word_count: 0
+
+**Prediction:**
+
+```
+Legitimate (probability ≈ 0.000)
+```
+
+---
+
+## Conclusion
+
+The logistic regression model successfully detects spam emails with high accuracy.  
+Both numerical evaluation and manual email testing confirm that the model captures meaningful spam characteristics such as capitalization, links, and spam-related keywords.
+
+---
+
+## Reproducibility
+
+All code, data, and visualizations required to reproduce the results are included in this repository.  
+The model can be re-trained and evaluated by running:
+
+```
+assignment2_spam_detection.py
+```
+
+
 ## Reproducibility
 
 All code used for data processing, model training, coefficient extraction, and visualization is included in this repository.  
