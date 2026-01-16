@@ -87,6 +87,18 @@ The extracted coefficients and visualizations demonstrate that the model correct
 
 ---
 
+## Reproducibility
+
+All code, data, and visualizations required to reproduce the results are included in this repository.  
+The model can be re-trained and evaluated by running:
+
+```
+assignment1_logistic_regression.py
+```
+
+
+---
+
 # Assignment 2 – Spam Email Detection
 
 ---
@@ -265,8 +277,3 @@ The model can be re-trained and evaluated by running:
 assignment2_spam_detection.py
 ```
 
-
-## Reproducibility
-
-All code used for data processing, model training, coefficient extraction, and visualization is included in this repository.  
-The results can be reproduced by running the provided Python scripts.
